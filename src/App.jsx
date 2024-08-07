@@ -34,23 +34,39 @@ export default function App() {
     const adicionarProdutoPedido = (produto) => {
         setPedidos([...listaPedidos, produto]);
     };
+console.table(listaPedidos);
+
+
+const removerItem = (id)=> {
+    let remover = false;
+    let listaAux = listaPedidos.filter((pedido)=>
+    {
+        if(pedido.id == id){
+        if(remover == false){
+            remover == true;
+            return null
+        }
+        }else{
+            return pedido;
+        }
+    });
+    setPedidos(listaAux, remover);
 
     return (
-    <div className="bloco-principal">
-
-    <div className="bloco-produtos">
+     <div className="bloco-principal">
+      <div className="bloco-produtos">
 
     {listaProdutos.map((produto) => (
 
-    <div key={produto.id}>
+    <div key={pedido.id}>
 
-    <img src={produto.imagem} alt={produto.item} />
+    <img src={produto.imagem} alt={pedido.item} />
     
-    <p>{produto.item}</p>
+    <p>{pedido.item}</p>
 
-    <p>{produto.preco}</p>
+    <p>{pedido.preco}</p>
     
-    <button onClick={() => adicionarProdutoPedido(produto)}>Adicionar</button>
+    <button onClick={() => adicionarProdutoPedido(pedido)}>Adicionar</button>
     </div>
 
     ))}
@@ -67,7 +83,7 @@ export default function App() {
     <thead>
     <tr>
 
-    <th>Produto</th>
+    <th>Pedido</th>
 
     <th>Valor</th>
 
@@ -77,12 +93,14 @@ export default function App() {
 
     <tbody>
 
-    {listaPedidos.map((produto) => (
-    <tr key={produto.id}>
+    {listaPedidos.map((pedido) => (
+    <tr key={pedido.id}>
 
-    <td>{produto.item}</td>
+    <td>{pedido.item}</td>
 
-    <td>{produto.preco}</td>
+    <td>{pedido.preco}</td>
+
+    <button onClick={() => removerItem(pedido.id)}>X</button>
 
     </tr>
     ))}
@@ -94,4 +112,4 @@ export default function App() {
     
     </div>
     );
-}
+    }}
