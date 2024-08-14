@@ -5,7 +5,7 @@ export default function App() {
     const [listaProdutos, setProdutos] = useState([
         {
             id: 1,
-            item: "Hambúrguer",
+            item: "hamburger",
             imagem: "https://www.assai.com.br/sites/default/files/shutterstock_1806472312.jpg",
             preco: "R$ 25,99"
         },
@@ -31,85 +31,56 @@ export default function App() {
 
     const [listaPedidos, setPedidos] = useState([]);
 
-    const adicionarProdutoPedido = (produto) => {
-        setPedidos([...listaPedidos, produto]);
+    const adicionarItemPedidos = (objeto) => {
+        setPedidos([...listaPedidos, objeto]);
     };
-console.table(listaPedidos);
 
-
-const removerItem = (id)=> {
-    let remover = false;
-    let listaAux = listaPedidos.filter((pedido)=>
-    {
-        if(pedido.id == id){
-        if(remover == false){
-            remover == true;
-            return null
-        }
-        }else{
-            return pedido;
-        }
-    });
-    setPedidos(listaAux, remover);
+    const removerItem = (id) => {
+        let remover = false;
+        const listaAux = listaPedidos.filter((produto) => {
+            if (remover = produto.id == id) {
+                remover = true;
+                return false;
+            }
+            return true;
+        });
+        setPedidos(listaAux);
+    };
 
     return (
-     <div className="bloco-principal">
-      <div className="bloco-produtos">
-
-    {listaProdutos.map((produto) => (
-
-    <div key={pedido.id}>
-
-    <img src={produto.imagem} alt={pedido.item} />
-    
-    <p>{pedido.item}</p>
-
-    <p>{pedido.preco}</p>
-    
-    <button onClick={() => adicionarProdutoPedido(pedido)}>Adicionar</button>
-    </div>
-
-    ))}
-
-    </div>
-
-
-    <div className="bloco-pedidos">
-
-    <p>Meus Pedidos</p>
-
-    <table>
-
-    <thead>
-    <tr>
-
-    <th>Pedido</th>
-
-    <th>Valor</th>
-
-    </tr>
-
-    </thead>
-
-    <tbody>
-
-    {listaPedidos.map((pedido) => (
-    <tr key={pedido.id}>
-
-    <td>{pedido.item}</td>
-
-    <td>{pedido.preco}</td>
-
-    <button onClick={() => removerItem(pedido.id)}>X</button>
-
-    </tr>
-    ))}
-    </tbody>
-
-    </table>
-
-    </div>
-    
-    </div>
+        <div className="bloco-principal">
+            <div className="bloco-produtos">
+                {listaProdutos.map((produto) => (
+                    <div key={produto.id}>
+                        <img src={produto.imagem} alt={produto.item} />
+                        <p>{produto.item}</p>
+                        <p>{produto.preco}</p>
+                        <button onClick={() => adicionarItemPedidos(produto)}>Adicionar</button>
+                    </div>
+                ))}
+            </div>
+            <div className="bloco-pedidos">
+                <p>Meus Pedidos</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Pedido</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {listaPedidos.map((produto) => (
+                            <tr key={produto.id}>
+                                <td>{produto.item}</td>
+                                <td>
+                                    {produto.preco}
+                                    <button onClick={() => removerItem(produto.id)}>X</button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     );
-    }}
+}
